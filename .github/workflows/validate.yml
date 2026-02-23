@@ -1,0 +1,38 @@
+name: Validate & Rebuild STATUS
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history needed for git log parsing
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Validate frontmatter & rebuild STATUS.md
+        run: python .github/scripts/validate_and_update.py
+
+      - name: Commit updated STATUS.md
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add STATUS.md
+          # Only commit if STATUS.md actually changed
+          git diff --cached --quiet || git commit -m "chore: rebuild STATUS.md [skip ci]"
+          git push
