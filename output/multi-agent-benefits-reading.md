@@ -1,3 +1,14 @@
+---
+topic_id: multi-agent-benefits
+state: distilling
+contributors: [claude]
+refs: [distill/multi-agent-benefits-1-seed.md, distill/rag-agent-evolution-1-seed.md, distill/rag-agent-evolution-2-long-context-comparison.md]
+next_step: >
+  Write rung 2 on the sycophancy collapse problem — empirical evidence for when
+  multi-agent debate converges to the wrong answer, and what architectural mitigations
+  (anonymization, CONSENSAGENT, role design) actually work. Then consider synthesis.
+---
+
 # Multi-Agent Architecture: Benefits, Hallucination & Limits
 ### A Research Briefing — March 2026
 
